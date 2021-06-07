@@ -1,0 +1,74 @@
+<div class="container">
+    <mat-card class="card" *ngIf="retornoDivida === null">
+        <mat-card-header>
+            <mat-card-title>Informações da dívida</mat-card-title>
+            
+        </mat-card-header>
+
+        <mat-card-content>
+            
+            <form #divida = "ngForm">
+                <div class="container" fxFlex fxLayout="column" fxLayoutAlign="none">
+                    <mat-form-field>
+                        <mat-label>Número do título</mat-label>
+                        <input matInput name="numeroDoTitulo" ngModel>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Nome do devedor</mat-label>
+                        <input matInput name="nomeDevedor" ngModel>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>CPF do devedor</mat-label>
+                        <input matInput name="cpfDevedor" ngModel>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>% de juros</mat-label>
+                        <input matInput type="number" name="percentualJuros" ngModel>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>% de multa</mat-label>
+                        <input matInput type="number" name="percentualMulta" ngModel>
+                    </mat-form-field>
+
+                    <h3>Adicionar parcelas</h3>
+                    <mat-form-field>
+                        <mat-label>Número da parcela</mat-label>
+                        <input matInput type="number" name="numeroDaParcela" ngModel>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Data de vencimento</mat-label>
+                        <input matInput type="date" name="dataDeVencimento" ngModel>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Valor da parcela</mat-label>
+                        <input matInput type="number" name="valorDaParcela" ngModel>
+                    </mat-form-field>
+
+                    <button mat-button color="primary" (click)="onClickAdd(divida.value)">
+                        Adicionar
+                    </button>
+
+                    <h3>Parcelas adicionadas</h3>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Selecione uma opção</mat-label>
+                        <mat-select name="parcela">
+                            <mat-option *ngFor="let p of parcelas" [ngValue]="p">N.: {{p.numeroDaParcela}} Data: {{p.dataDeVencimento}} Valor: {{p.valorDaParcela}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <button mat-button color="warn" (click)="onClickRemove(divida.value)">
+                        Remover
+                    </button>
+                    
+                    <button mat-button color="primary" (click)="onClickConfirm(divida.value)">
+                        Confirmar dados
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="card" *ngIf="retornoDivida !== null">
+        <app-dividaexibicao>
+        </app-dividaexibicao>
+    </mat-card>
+</div>
